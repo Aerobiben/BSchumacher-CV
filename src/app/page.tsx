@@ -1,5 +1,5 @@
-import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
-import { Card, CardHeader, CardContent } from "@/components/ui/card";
+﻿import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
+import { Card, CardContent, CardHeader } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { CommandMenu } from "@/components/command-menu";
 import { Metadata } from "next";
@@ -23,9 +23,9 @@ export default function Page() {
   return (
     <main className="container relative mx-auto scroll-my-12 overflow-auto p-4 print:p-12 md:p-16">
       <section className="mx-auto w-full max-w-2xl space-y-8 bg-white print:space-y-6">
-        <div className="flex items-center justify-between">
-          <div className="flex-1 space-y-1.5">
-            <h1 className="text-2xl font-bold">{RESUME_DATA.name}</h1>
+        <div className="flex flex-col gap-4 rounded-xl border border-border bg-card p-6 shadow-sm shadow-slate-200/50 transition-colors duration-300 dark:shadow-slate-950/40 sm:flex-row sm:items-center sm:justify-between">
+          <div className="space-y-1.5">
+            <h1 className="text-3xl font-bold">{RESUME_DATA.name}</h1>
             <p className="max-w-md text-pretty font-mono text-sm text-muted-foreground">
               {RESUME_DATA.about}
             </p>
@@ -34,6 +34,7 @@ export default function Page() {
                 className="inline-flex gap-x-1.5 align-baseline leading-none hover:underline"
                 href={RESUME_DATA.locationLink}
                 target="_blank"
+                rel="noreferrer"
               >
                 <GlobeIcon className="h-3 w-3" />
                 {RESUME_DATA.location}
@@ -41,24 +42,14 @@ export default function Page() {
             </p>
             <div className="flex gap-x-1 pt-1 font-mono text-sm text-muted-foreground print:hidden">
               {RESUME_DATA.contact.email ? (
-                <Button
-                  className="h-8 w-8"
-                  variant="outline"
-                  size="icon"
-                  asChild
-                >
+                <Button className="h-8 w-8" variant="outline" size="icon" asChild>
                   <a href={`mailto:${RESUME_DATA.contact.email}`}>
                     <MailIcon className="h-4 w-4" />
                   </a>
                 </Button>
               ) : null}
               {RESUME_DATA.contact.tel ? (
-                <Button
-                  className="h-8 w-8"
-                  variant="outline"
-                  size="icon"
-                  asChild
-                >
+                <Button className="h-8 w-8" variant="outline" size="icon" asChild>
                   <a href={`tel:${RESUME_DATA.contact.tel}`}>
                     <PhoneIcon className="h-4 w-4" />
                   </a>
@@ -67,21 +58,15 @@ export default function Page() {
               {RESUME_DATA.contact.social.map((social) => {
                 const Icon = SOCIAL_ICONS[social.icon];
                 return (
-                  <Button
-                    key={social.name}
-                    className="h-8 w-8"
-                    variant="outline"
-                    size="icon"
-                    asChild
-                  >
-                    <a href={social.url}>
+                  <Button key={social.name} className="h-8 w-8" variant="outline" size="icon" asChild>
+                    <a href={social.url} target="_blank" rel="noreferrer">
                       <Icon className="h-4 w-4" />
                     </a>
                   </Button>
                 );
               })}
             </div>
-            <div className="hidden flex-col gap-x-1 font-mono text-sm text-muted-foreground print:flex">
+            <div className="hidden flex-col gap-1 font-mono text-sm text-muted-foreground print:flex">
               {RESUME_DATA.contact.email ? (
                 <a href={`mailto:${RESUME_DATA.contact.email}`}>
                   <span className="underline">{RESUME_DATA.contact.email}</span>
@@ -115,33 +100,29 @@ export default function Page() {
               <Card key={`${work.company}-${work.start}`}>
                 <CardHeader>
                   <div className="flex items-center justify-between gap-x-2 text-base">
-                    <h3 className="inline-flex items-center justify-center gap-x-1 font-semibold leading-none">
-                      <a className="hover:underline" href={work.link}>
-                        {work.company}
-                      </a>
-                      {work.badges.length > 0 && (
-                        <span className="inline-flex gap-x-1">
-                          {work.badges.map((badge) => (
-                            <Badge
-                              variant="secondary"
-                              className="align-middle text-xs"
-                              key={badge}
-                            >
-                              {badge}
-                            </Badge>
-                          ))}
-                        </span>
-                      )}
-                    </h3>
+                    <div>
+                      <h3 className="font-semibold leading-none">
+                        <a className="hover:underline" href={work.link} target="_blank" rel="noreferrer">
+                          {work.company}
+                        </a>
+                      </h3>
+                      <p className="text-sm text-muted-foreground">{work.title}</p>
+                    </div>
                     <div className="text-sm tabular-nums text-gray-500">
                       {work.start} - {work.end}
                     </div>
                   </div>
-                  <h4 className="font-mono text-sm leading-none">
-                    {work.title}
-                  </h4>
+                  {work.badges.length > 0 && (
+                    <div className="mt-2 flex flex-wrap gap-1">
+                      {work.badges.map((badge) => (
+                        <Badge key={badge} variant="secondary" className="text-xs">
+                          {badge}
+                        </Badge>
+                      ))}
+                    </div>
+                  )}
                 </CardHeader>
-                <CardContent className="mt-2 text-xs">
+                <CardContent className="mt-2 text-xs text-muted-foreground">
                   {work.description}
                 </CardContent>
               </Card>
@@ -156,15 +137,15 @@ export default function Page() {
               <Card key={education.school}>
                 <CardHeader>
                   <div className="flex items-center justify-between gap-x-2 text-base">
-                    <h3 className="font-semibold leading-none">
-                      {education.school}
-                    </h3>
+                    <h3 className="font-semibold leading-none">{education.school}</h3>
                     <div className="text-sm tabular-nums text-gray-500">
                       {education.start} - {education.end}
                     </div>
                   </div>
                 </CardHeader>
-                <CardContent className="mt-2">{education.degree}</CardContent>
+                <CardContent className="mt-2 text-xs text-muted-foreground">
+                  {education.degree}
+                </CardContent>
               </Card>
             ))}
           </Section>

@@ -19,13 +19,13 @@ interface Props {
 }
 
 export const CommandMenu = ({ links }: Props) => {
-  const [open, setOpen] = React.useState(false);
+  const [open, setOpen] = React.useState<boolean>(false);
 
   React.useEffect(() => {
     const down = (e: KeyboardEvent) => {
       if (e.key === "j" && (e.metaKey || e.ctrlKey)) {
         e.preventDefault();
-        setOpen((open) => !open);
+        setOpen((prevOpen: boolean) => !prevOpen);
       }
     };
 
@@ -43,7 +43,7 @@ export const CommandMenu = ({ links }: Props) => {
         to open the command menu
       </p>
       <Button
-        onClick={() => setOpen((open) => !open)}
+        onClick={() => setOpen((prevOpen: boolean) => !prevOpen)}
         variant="outline"
         size="icon"
         className="fixed bottom-4 right-4 flex rounded-full shadow-2xl print:hidden xl:hidden"
