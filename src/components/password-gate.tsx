@@ -2,7 +2,7 @@
 
 import { useState, useEffect } from 'react';
 
-const CORRECT_PASSWORD = 'CV-Ben';
+const CORRECT_PASSWORD = process.env.NEXT_PUBLIC_CV_PASSWORD || '';
 
 export function PasswordGate({ children }: { children: React.ReactNode }) {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
