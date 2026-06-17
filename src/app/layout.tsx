@@ -4,7 +4,6 @@ import { Inter } from "next/font/google";
 
 import "./globals.css";
 import React from "react";
-import { PasswordGate } from "@/components/password-gate";
 
 export const metadata: Metadata = {
   title: "Ben Schumacher — CV",
@@ -24,9 +23,7 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en" className={inter.className}>
-      <body>
-        <PasswordGate>{children}</PasswordGate>
-      </body>
+      <body>{children}</body>
       <Analytics />
     </html>
   );
