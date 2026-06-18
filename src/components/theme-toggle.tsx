@@ -1,6 +1,6 @@
 'use client';
 
-import { useLayoutEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { MoonIcon, SunIcon } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 
@@ -12,7 +12,7 @@ export function ThemeToggle() {
   const [theme, setTheme] = useState<Theme>('light');
   const [mounted, setMounted] = useState(false);
 
-  useLayoutEffect(() => {
+  useEffect(() => {
     const storedTheme = window.localStorage.getItem(STORAGE_KEY) as Theme | null;
     const systemTheme = window.matchMedia('(prefers-color-scheme: dark)').matches
       ? 'dark'

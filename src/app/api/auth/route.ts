@@ -1,5 +1,19 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { cookies } from 'next/headers';
+import { timingSafeEqual } from 'crypto';
+
+// Node.js Runtime erzwingen (crypto ist im Edge-Runtime nicht verfügbar)
+export const runtime = 'nodejs';
+
+// Zeitkonstanter Vergleich, der nicht über die Länge des Inputs leakt.
+function safeCompare(a: string, b: string): boolean {
+  const bufferA = Buffer.from(a);
+  const bufferB = Buffer.from(b);
+  if (bufferA.length !== bufferB.length) {
+    return false;
+  }
+  return timingSafeEqual(bufferA, bufferB);
+}
 
 export async function POST(request: NextRequest) {
   try {
@@ -13,8 +27,9 @@ export async function POST(request: NextRequest) {
       );
     }
 
-    // Sichere Passwort-Vergleich (verhindert Timing-Attacks)
-    const isCorrect = password === correctPassword;
+    // Zeitkonstanter Passwort-Vergleich (verhindert Timing-Attacks)
+    const isCorrect =
+      typeof password === 'string' && safeCompare(password, correctPassword);
 
     if (!isCorrect) {
       // Künstliche Verzögerung um Brute-Force zu bremsen

@@ -23,7 +23,10 @@ export const metadata: Metadata = {
 export default function Page() {
   return (
     <main className="container relative mx-auto scroll-my-12 overflow-auto p-4 print:p-12 md:p-16">
-      <section className="mx-auto w-full max-w-2xl space-y-8 bg-white print:space-y-6">
+      <div className="fixed right-4 top-4 z-50 print:hidden">
+        <ThemeToggle />
+      </div>
+      <section className="mx-auto w-full max-w-2xl space-y-8 bg-background print:space-y-6">
         <div className="flex items-center justify-between">
           <div className="flex-1 space-y-1.5">
             <h1 className="text-2xl font-bold">{RESUME_DATA.name}</h1>
@@ -35,6 +38,7 @@ export default function Page() {
                 className="inline-flex gap-x-1.5 align-baseline leading-none hover:underline"
                 href={RESUME_DATA.locationLink}
                 target="_blank"
+                rel="noreferrer"
               >
                 <GlobeIcon className="h-3 w-3" />
                 {RESUME_DATA.location}
@@ -108,7 +112,7 @@ export default function Page() {
                       </h3>
                       <p className="text-sm text-muted-foreground">{work.title}</p>
                     </div>
-                    <div className="text-sm tabular-nums text-gray-500">
+                    <div className="text-sm tabular-nums text-muted-foreground">
                       {work.start} - {work.end}
                     </div>
                   </div>
@@ -138,7 +142,7 @@ export default function Page() {
                 <CardHeader>
                   <div className="flex items-center justify-between gap-x-2 text-base">
                     <h3 className="font-semibold leading-none">{education.school}</h3>
-                    <div className="text-sm tabular-nums text-gray-500">
+                    <div className="text-sm tabular-nums text-muted-foreground">
                       {education.start} - {education.end}
                     </div>
                   </div>

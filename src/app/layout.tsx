@@ -16,15 +16,23 @@ const inter = Inter({
   display: "swap",
 });
 
+// Setzt das Theme vor dem ersten Paint, um ein Aufblitzen (FOUC) zu vermeiden.
+const themeInitScript = `(function(){try{var t=localStorage.getItem('theme-preference');var d=t?t==='dark':window.matchMedia('(prefers-color-scheme: dark)').matches;if(d){document.documentElement.classList.add('dark');}}catch(e){}})();`;
+
 export default function RootLayout({
   children,
 }: {
   children: React.ReactNode;
 }) {
   return (
-    <html lang="en" className={inter.className}>
-      <body>{children}</body>
-      <Analytics />
+    <html lang="de" className={inter.className} suppressHydrationWarning>
+      <head>
+        <script dangerouslySetInnerHTML={{ __html: themeInitScript }} />
+      </head>
+      <body>
+        {children}
+        <Analytics />
+      </body>
     </html>
   );
 }
