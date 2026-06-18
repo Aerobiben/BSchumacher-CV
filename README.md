@@ -8,7 +8,7 @@ Gebaut mit Next.js 14, React, TypeScript, Tailwind CSS und shadcn/ui — deploye
 
 - **Eine Konfigurationsdatei**: Alle Inhalte werden in [`src/data/resume-data.ts`](./src/data/resume-data.ts) gepflegt.
 - **Dark Mode** mit System-Erkennung und ohne Aufblitzen beim Laden.
-- **Passwortschutz** über Middleware + serverseitige Auth-Route.
+- **Passwortschutz** über Middleware + serverseitige Auth-Route. Das Passwort wird ausschließlich als **SHA-256-Hash** geprüft — es liegt nirgendwo im Klartext vor.
 - **Druck-/PDF-optimiertes Layout** sowie ein Command-Menü (⌘/Strg + J).
 - Responsive für unterschiedliche Geräte.
 
@@ -21,16 +21,23 @@ yarn dev
 
 Die App läuft anschließend auf http://localhost:3000.
 
-## Umgebungsvariablen
+## Passwortschutz
 
-Lege eine `.env.local` an (siehe [`.env.example`](./.env.example)):
+Das Zugriffspasswort wird **niemals im Klartext** gespeichert — weder im Code
+noch in einer `.env`-Datei. Stattdessen liegt in
+[`src/app/api/auth/route.ts`](./src/app/api/auth/route.ts) nur der
+**SHA-256-Hash** des Passworts. Bei der Anmeldung wird die Eingabe gehasht und
+zeitkonstant mit diesem Hash verglichen (Schutz vor Timing-Angriffen).
 
-```bash
-CV_PASSWORD=dein-passwort
+Passwort ändern (Beispiel mit PowerShell):
+
+```powershell
+[System.BitConverter]::ToString([System.Security.Cryptography.SHA256]::Create().ComputeHash([System.Text.Encoding]::UTF8.GetBytes('NEUES-PASSWORT'))).Replace('-','').ToLower()
 ```
 
-- `CV_PASSWORD` ist das Passwort für den Zugriff auf die Seite.
-- Wird die Variable nicht gesetzt, antwortet die Auth-Route mit HTTP 500.
+Den ausgegebenen Hash anschließend als `PASSWORD_HASH` in der Auth-Route
+hinterlegen — oder optional über die Umgebungsvariable `CV_PASSWORD_HASH`
+(ebenfalls nur der Hash, kein Klartext) setzen.
 
 ## Inhalte anpassen
 
@@ -41,6 +48,7 @@ gepflegt. Leere Arrays blenden die jeweilige Sektion automatisch aus.
 ## Deployment auf Vercel
 
 1. Repository auf Vercel importieren (Framework wird automatisch als **Next.js** erkannt).
-2. Unter **Settings → Environment Variables** die Variable `CV_PASSWORD` setzen
-   (für alle Environments: Production, Preview, Development).
+2. Optional unter **Settings → Environment Variables** die Variable
+   `CV_PASSWORD_HASH` (SHA-256-Hash, kein Klartext) setzen, falls das Passwort
+   ohne Code-Änderung überschrieben werden soll.
 3. Deployen — es ist keine weitere Konfiguration nötig.

@@ -1,11 +1,29 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { cookies } from 'next/headers';
-import { timingSafeEqual } from 'crypto';
+import { createHash, timingSafeEqual } from 'crypto';
 
 // Node.js Runtime erzwingen (crypto ist im Edge-Runtime nicht verfügbar)
 export const runtime = 'nodejs';
 
+// ─────────────────────────────────────────────────────────────────────────────
+//  Sicherheit: Das Passwort wird NIRGENDWO im Klartext gespeichert.
+//  Stattdessen liegt nur der SHA-256-Hash vor. Da SHA-256 eine Einwegfunktion
+//  ist, lässt sich das Passwort daraus nicht zurückrechnen.
+//
+//  Der Hash kann optional über die Umgebungsvariable CV_PASSWORD_HASH
+//  überschrieben werden; ansonsten gilt der hier hinterlegte Standard-Hash.
+// ─────────────────────────────────────────────────────────────────────────────
+const PASSWORD_HASH =
+  process.env.CV_PASSWORD_HASH ??
+  '20f2896560cf6f2619fdff529f0b0b9765ba754f28726bd3fefb858d3e689687';
+
+function sha256Hex(value: string): string {
+  return createHash('sha256').update(value, 'utf8').digest('hex');
+}
+
 // Zeitkonstanter Vergleich, der nicht über die Länge des Inputs leakt.
+// Da beide Hashes immer gleich lang (64 Hex-Zeichen) sind, ist der Vergleich
+// vollständig zeitkonstant.
 function safeCompare(a: string, b: string): boolean {
   const bufferA = Buffer.from(a);
   const bufferB = Buffer.from(b);
@@ -18,18 +36,11 @@ function safeCompare(a: string, b: string): boolean {
 export async function POST(request: NextRequest) {
   try {
     const { password } = await request.json();
-    const correctPassword = process.env.CV_PASSWORD;
 
-    if (!correctPassword) {
-      return NextResponse.json(
-        { error: 'Server-Konfiguration fehlt' },
-        { status: 500 }
-      );
-    }
-
-    // Zeitkonstanter Passwort-Vergleich (verhindert Timing-Attacks)
+    // Eingabe hashen und gegen den gespeicherten Hash vergleichen.
     const isCorrect =
-      typeof password === 'string' && safeCompare(password, correctPassword);
+      typeof password === 'string' &&
+      safeCompare(sha256Hex(password), PASSWORD_HASH);
 
     if (!isCorrect) {
       // Künstliche Verzögerung um Brute-Force zu bremsen
@@ -47,6 +58,7 @@ export async function POST(request: NextRequest) {
       secure: process.env.NODE_ENV === 'production', // Nur HTTPS in Production
       sameSite: 'strict', // CSRF-Protection
       maxAge: 24 * 60 * 60, // 24 Stunden
+      path: '/',
     });
 
     return NextResponse.json({ success: true });
