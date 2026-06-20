@@ -18,12 +18,9 @@ export const RESUME_DATA = {
   initials: "BS", // Fallback für Avatar, falls Bild nicht lädt
   location: "Cologne, Germany,",
   locationLink: "https://www.google.com/maps/place/Cologne",
-  about:
-    "21 Jahre Alt" 
-    "Auszubildender zum Fachinformatiker für Systemintegration"
-    "In Köln geboren und aufgewachsen"
+  about: "21 Jahre alt · Auszubildender zum Fachinformatiker für Systemintegration · In Köln geboren und aufgewachsen",
   summary:
-    "Nach meinem Abitur im Jahr 2023 habe ich gezielt nach einem Berufsfeld gesucht, das meinen Interessen und Fähigkeiten entspricht und bin dabei auf den Ausbildungsberuf des Fachinformatikers für Systemintegration gestoßen, den ich seitdem mit großer Begeisterung verfolge und voraussichtlich 2027 abschließen werde. Besonders reizt mich dabei die Möglichkeit, wiederkehrende Arbeitsabläufe zu automatisieren und verschiedenste IT-Tools auszuprobieren, um Prozesse effizienter und das Arbeiten insgesamt einfacher zu gestalten. Diese Begeisterung für Automatisierung ist für mich weit mehr als nur ein Hobby sie ist die treibende Kraft hinter meiner beruflichen Ausrichtung, weshalb ich auch nach meiner Ausbildung gezielt in einem Tätigkeitsfeld arbeiten möchte, das mir Raum gibt, diese Leidenschaft weiterzuverfolgen.",
+    "Nach meinem Abitur im Jahr 2023 habe ich gezielt nach einem Berufsfeld gesucht, das meinen Interessen und Fähigkeiten entspricht und bin dabei auf den Ausbildungsberuf des Fachinformatikers für Systemintegration gestoßen, den ich seitdem mit großer Begeisterung verfolge und voraussichtlich 2027 abschließen werde. Besonders reizt mich dabei die Möglichkeit, wiederkehrende Arbeitsabläufe zu automatisieren und verschiedenste IT-Tools auszuprobieren, um Prozesse effizienter und das Arbeiten insgesamt einfacher zu gestalten. Diese Begeisterung für Automatisierung ist für mich weit mehr als nur ein Hobby sie ist die treibende Kraft hinter meiner beruflichen Ausrichtung, weshalb ich auch nach meiner Ausbildung gezielt in einem Tätigkeitsfeld arbeiten möchte, das mir Raum gibt, diese Leidenschaft weiterzuverfolgen.", 
   avatarUrl: "https://avatars.githubusercontent.com/u/154968490?v=4",
 
   // ─── Kontakt ─────────────────────────────────────────────────────────────
