@@ -9,6 +9,8 @@ import { Button } from "@/components/ui/button";
 import { ThemeToggle } from "@/components/theme-toggle";
 import { RESUME_DATA } from "@/data/resume-data";
 import { GitHubIcon, LinkedInIcon } from "@/components/icons";
+import { cookies } from "next/headers";
+import { redirect } from "next/navigation";
 
 const SOCIAL_ICONS = {
   github: GitHubIcon,
@@ -21,6 +23,12 @@ export const metadata: Metadata = {
 };
 
 export default function Page() {
+  const authToken = cookies().get('cv-auth-token')?.value;
+
+  if (!authToken) {
+    redirect('/auth');
+  }
+
   return (
     <main className="container relative mx-auto scroll-my-12 overflow-auto p-4 print:p-12 md:p-16">
       <div className="fixed right-4 top-4 z-50 print:hidden">
