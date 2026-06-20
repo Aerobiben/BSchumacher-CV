@@ -1,22 +1,20 @@
 import { NextRequest, NextResponse } from 'next/server';
 
+const publicPaths = ['/auth', '/api/auth'];
+
 export function middleware(request: NextRequest) {
-  // Passwort-API-Route nicht schützen
-  if (request.nextUrl.pathname.startsWith('/api/auth')) {
+  const pathname = request.nextUrl.pathname;
+
+  if (publicPaths.some((path) => pathname === path || pathname.startsWith(`${path}/`))) {
     return NextResponse.next();
   }
 
-  // Überprüfe ob der User authentifiziert ist
   const authToken = request.cookies.get('cv-auth-token');
 
-  // Wenn kein Token und nicht auf der Auth-Page -> zu Auth-Page umleiten
-  if (!authToken && request.nextUrl.pathname !== '/auth') {
-    return NextResponse.redirect(new URL('/auth', request.url));
-  }
-
-  // Wenn Token vorhanden und auf Auth-Page -> zu Homepage umleiten
-  if (authToken && request.nextUrl.pathname === '/auth') {
-    return NextResponse.redirect(new URL('/', request.url));
+  if (!authToken) {
+    const authUrl = request.nextUrl.clone();
+    authUrl.pathname = '/auth';
+    return NextResponse.redirect(authUrl);
   }
 
   return NextResponse.next();

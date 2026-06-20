@@ -21,7 +21,7 @@ export const RESUME_DATA = {
   about:
     "21 Jahre alter Auszubildender zum Fachinformatiker für Systemintegration mit einer Leidenschaft für IT-Automatisierung und Prozessoptimierung",
   summary:
-    "Nach meinem Abitur im Jahr 2023 habe ich gezielt nach einem Berufsfeld gesucht, das meinen Interessen und Fähigkeiten entspricht und bin dabei auf den Ausbildungsberuf des Fachinformatikers für Systemintegration gestoßen, den ich seitdem mit großer Begeisterung verfolge und voraussichtlich 2027 abschließen werde. Besonders reizt mich dabei die Möglichkeit, wiederkehrende Arbeitsabläufe zu automatisieren und verschiedenste IT-Tools auszuprobieren, um Prozesse effizienter und das Arbeiten insgesamt einfacher zu gestalten. Diese Begeisterung für Automatisierung ist für mich weit mehr als nur ein Hobby – sie ist die treibende Kraft hinter meiner beruflichen Ausrichtung, weshalb ich auch nach meiner Ausbildung gezielt in einem Tätigkeitsfeld arbeiten möchte, das mir Raum gibt, diese Leidenschaft weiterzuverfolgen.",
+    "Nach meinem Abitur im Jahr 2023 habe ich gezielt nach einem Berufsfeld gesucht, das meinen Interessen und Fähigkeiten entspricht und bin dabei auf den Ausbildungsberuf des Fachinformatikers für Systemintegration gestoßen, den ich seitdem mit großer Begeisterung verfolge und voraussichtlich 2027 abschließen werde. Besonders reizt mich dabei die Möglichkeit, wiederkehrende Arbeitsabläufe zu automatisieren und verschiedenste IT-Tools auszuprobieren, um Prozesse effizienter und das Arbeiten insgesamt einfacher zu gestalten. Diese Begeisterung für Automatisierung ist für mich weit mehr als nur ein Hobby sie ist die treibende Kraft hinter meiner beruflichen Ausrichtung, weshalb ich auch nach meiner Ausbildung gezielt in einem Tätigkeitsfeld arbeiten möchte, das mir Raum gibt, diese Leidenschaft weiterzuverfolgen.",
   avatarUrl: "https://avatars.githubusercontent.com/u/154968490?v=4",
 
   // ─── Kontakt ─────────────────────────────────────────────────────────────
@@ -88,20 +88,19 @@ export const RESUME_DATA = {
   // ─── Ausbildung ──────────────────────────────────────────────────────────
 
   education: [
-    {
-      school: "Abtei-Gymnasium Brauweiler",
-      degree: "Abitur",
-      start: "2016",
-      end: "2023",
-    },
      {
       school: "Georg-Simon-Ohm Berufskolleg Köln",
       degree: "Fachinformatiker für Systemintegration",
       start: "2024",
       end: "2027",
     },
-    // Weitere Ausbildung:
-    // { school: "...", degree: "...", start: "...", end: "..." },
+    {
+      school: "Abtei-Gymnasium Brauweiler",
+      degree: "Abitur",
+      start: "2016",
+      end: "2023",
+    },
+  
   ],
 
   // ─── Skills ──────────────────────────────────────────────────────────────
