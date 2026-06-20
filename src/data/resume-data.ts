@@ -19,9 +19,9 @@ export const RESUME_DATA = {
   location: "Cologne, Germany,",
   locationLink: "https://www.google.com/maps/place/Cologne",
   about:
-    "Nach erfolgreichem Abschluss meines Abiturs in 2023 habe ich nach beruflichen Perspektiven gesucht, die meinen Interessen und Fähigkeiten entsprechen. Dabei bin ich auf den Ausbildungsberuf des Fachinformatikers gestoßen.",
+    "21 Jahre alter Auszubildender zum Fachinformatiker für Systemintegration mit einer Leidenschaft für IT-Automatisierung und Prozessoptimierung",
   summary:
-    "Ich bin fasziniert von Software, Apps und Technologie, wie man mit Innovativen Lösungen das Leben von Menschen wie auch Unternehmen so viel einfacher und besser machen kann.Während meiner dreijährigen Teilnahme am Informatikkurs habe ich grundlegende Kenntnisse in Java und Python erworben.Ein Einblick in das Berufsfeld wäre für mich Gold wert!",
+    "Nach meinem Abitur im Jahr 2023 habe ich gezielt nach einem Berufsfeld gesucht, das meinen Interessen und Fähigkeiten entspricht und bin dabei auf den Ausbildungsberuf des Fachinformatikers für Systemintegration gestoßen, den ich seitdem mit großer Begeisterung verfolge und voraussichtlich 2027 abschließen werde. Besonders reizt mich dabei die Möglichkeit, wiederkehrende Arbeitsabläufe zu automatisieren und verschiedenste IT-Tools auszuprobieren, um Prozesse effizienter und das Arbeiten insgesamt einfacher zu gestalten. Diese Begeisterung für Automatisierung ist für mich weit mehr als nur ein Hobby – sie ist die treibende Kraft hinter meiner beruflichen Ausrichtung, weshalb ich auch nach meiner Ausbildung gezielt in einem Tätigkeitsfeld arbeiten möchte, das mir Raum gibt, diese Leidenschaft weiterzuverfolgen.",
   avatarUrl: "https://avatars.githubusercontent.com/u/154968490?v=4",
 
   // ─── Kontakt ─────────────────────────────────────────────────────────────
@@ -52,6 +52,16 @@ export const RESUME_DATA = {
   // end: "ongoing" für aktuelle Stelle
 
   work: [
+     {
+      company: "Inverto GmbH",
+      link: "https://www.inverto.de/",
+      badges: [],
+      title: "Azubi Fachinformatiker für Systemintegration",
+      start: "2023",
+      end: "ongoing",
+      description:
+        "Grundlagen der IT, Netzwerkadministration, Serveradministration, IT-Sicherheit, Hardware einrichtung, Support und Wartung von IT-Systemen",
+    },   
     {
       company: "Aerobis",
       link: "https://aerobis.com",
@@ -62,16 +72,7 @@ export const RESUME_DATA = {
       description:
         "Social Media Beiträge, Anlage und Pflege von Produkten, Fotografie und Optimierung, Optimierung des Shop-Systems",
     },
-    {
-      company: "Inverto GmbH",
-      link: "https://www.inverto.de/",
-      badges: [],
-      title: "Azubi Fachinformatiker für Systemintegration",
-      start: "2023",
-      end: "ongoing",
-      description:
-        "Grundlagen der IT, Netzwerkadministration, Serveradministration, IT-Sicherheit, Hardware einrichtung, Support und Wartung von IT-Systemen",
-    },
+  
     {
       company: "M.Korfmacher",
       link: "https://www.mkorfmacher.de/",
@@ -93,6 +94,12 @@ export const RESUME_DATA = {
       start: "2016",
       end: "2023",
     },
+     {
+      school: "Georg-Simon-Ohm Berufskolleg Köln",
+      degree: "Fachinformatiker für Systemintegration",
+      start: "2024",
+      end: "2027",
+    },
     // Weitere Ausbildung:
     // { school: "...", degree: "...", start: "...", end: "..." },
   ],
@@ -106,7 +113,7 @@ export const RESUME_DATA = {
     "Konfiguration und Installation von neuen Hardware Komponenten",
     "Microsoft 365 Administration",
     "IT Support mit internationalem Kundenkontakt",
-    "ITIL 4 Foundation Zertifizierung",
+    "ITIL 4 Foundation Training",
     "Erfahrung mit diversen KI Tools",
     "Automatisierung von Prozessen",
     "Führerschein Klasse B",

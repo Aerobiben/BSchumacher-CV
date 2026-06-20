@@ -172,8 +172,8 @@ export default function Page() {
             ITIL 4 Foundation Zertifikat als Download.
           </p>
           <Button variant="secondary" asChild>
-            <a href="/ITIL-4-Foundation.pdf" download>
-              ITIL 4 Foundation PDF herunterladen
+            <a href="/ITIL-Cert.png" download>
+              ITIL 4 Foundation herunterladen
             </a>
           </Button>
         </Section>
