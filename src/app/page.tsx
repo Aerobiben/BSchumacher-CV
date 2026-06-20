@@ -2,6 +2,7 @@
 import { Card, CardContent, CardHeader } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { CommandMenu } from "@/components/command-menu";
+import Image from "next/image";
 import { Metadata } from "next";
 import { Section } from "@/components/ui/section";
 import { GlobeIcon, MailIcon, PhoneIcon } from "lucide-react";
@@ -189,11 +190,29 @@ export default function Page() {
         {RESUME_DATA.projects.length > 0 && (
           <Section>
             <h2 className="text-xl font-bold">Projects</h2>
-            <ul className="list-inside list-disc space-y-1 font-mono text-sm text-muted-foreground">
+            <div className="grid gap-4 md:grid-cols-2">
               {RESUME_DATA.projects.map((project) => (
-                <li key={project}>{project}</li>
+                <Card key={project.title} className="overflow-hidden border-white/10 bg-slate-950/80 shadow-lg shadow-slate-900/40">
+                  {project.image ? (
+                    <div className="relative h-48 overflow-hidden bg-slate-900">
+                      <Image
+                        src={project.image}
+                        alt={project.title}
+                        fill
+                        className="object-cover"
+                        sizes="(max-width: 768px) 100vw, 50vw"
+                      />
+                    </div>
+                  ) : null}
+                  <CardHeader>
+                    <h3 className="text-base font-semibold">{project.title}</h3>
+                  </CardHeader>
+                  <CardContent>
+                    <p className="text-sm text-muted-foreground">{project.description}</p>
+                  </CardContent>
+                </Card>
               ))}
-            </ul>
+            </div>
           </Section>
         )}
       </section>

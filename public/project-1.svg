@@ -1,0 +1,17 @@
+<svg width="1200" height="800" viewBox="0 0 1200 800" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Project illustration">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#4f46e5" />
+      <stop offset="100%" stop-color="#0f766e" />
+    </linearGradient>
+  </defs>
+  <rect width="1200" height="800" rx="40" fill="url(#bg)" />
+  <rect x="120" y="140" width="960" height="520" rx="30" fill="#ffffff20" stroke="#ffffff40" stroke-width="4" />
+  <path d="M220 240h760v320H220z" fill="#ffffff10" stroke="#ffffff30" stroke-width="2" />
+  <circle cx="320" cy="320" r="42" fill="#38bdf8" />
+  <circle cx="430" cy="320" r="26" fill="#a5b4fc" />
+  <path d="M540 360h280" stroke="#ffffff80" stroke-width="24" stroke-linecap="round" />
+  <path d="M540 420h220" stroke="#ffffff60" stroke-width="18" stroke-linecap="round" />
+  <path d="M540 480h180" stroke="#ffffff40" stroke-width="14" stroke-linecap="round" />
+  <text x="220" y="660" fill="#ffffffcc" font-family="Inter, sans-serif" font-size="56" font-weight="700">Projekt-Mockup</text>
+</svg>

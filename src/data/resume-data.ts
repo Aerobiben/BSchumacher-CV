@@ -123,7 +123,23 @@ export const RESUME_DATA = {
   // Array leer lassen ([]) → Projekte-Sektion wird nicht angezeigt
 
   projects: [
-    "Private Proxmox VE Umgebung mit mehreren virtuellen Maschinen und eigener Cloud erreichbar über Cloudflare Tunnel und eigener Domain",
-    "Digitale Bewerbungswebsite",
+    {
+      title: "Private Proxmox VE Umgebung",
+      description:
+        "Private Proxmox VE Umgebung mit mehreren virtuellen Maschinen und eigener Cloud, erreichbar über Cloudflare Tunnel und eigener Domain.",
+      image: "/project-1.svg",
+    },
+    {
+      title: "Digitale Bewerbungswebsite",
+      description:
+        "Moderne Bewerbungswebsite mit Passwortschutz, Download-Funktion und responsive Darstellung für Personalverantwortliche.",
+      image: "/project-2.svg",
+    },
+    {
+      title: "IT-Automatisierung & Support",
+      description:
+        "Automatisierung von Prozessen und IT-Support-Workflows mit Python, Monitoring und systemnaher Konfiguration.",
+      image: "/project-3.svg",
+    },
   ],
 } as const;
