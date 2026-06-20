@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Analytics } from "@vercel/analytics/react";
 import { Inter } from "next/font/google";
 
+// @ts-ignore: Cannot find module or type declarations for side-effect import of './globals.css'.
 import "./globals.css";
 import React from "react";
 
