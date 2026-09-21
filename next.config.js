@@ -4,6 +4,11 @@ const nextConfig = {
     unoptimized: true,
   },
   poweredByHeader: false,
+  experimental: {
+    outputFileTracingIncludes: {
+      "/media/[file]": ["./content/**/*"],
+    },
+  },
   async headers() {
     return [
       {

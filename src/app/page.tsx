@@ -35,12 +35,11 @@ export default async function Page() {
     <main className="relative min-h-screen overflow-x-hidden">
       <div className="pointer-events-none absolute inset-0 -z-10 bg-[radial-gradient(circle_at_top,_hsl(var(--accent))_0%,_transparent_42%)] opacity-70 print:hidden" />
 
-      <div className="fixed right-4 top-4 z-50 print:hidden md:right-6 md:top-6">
-        <ThemeToggle />
-      </div>
-
-      <div className="container mx-auto px-4 py-8 print:max-w-none print:p-0 md:px-8 md:py-14">
+      <div className="container mx-auto px-4 py-8 pb-24 print:max-w-none print:p-0 md:px-8 md:py-14 md:pb-24">
         <article className="mx-auto w-full max-w-3xl space-y-10 rounded-3xl border border-border/80 bg-card/80 p-5 shadow-xl shadow-black/5 backdrop-blur-sm print:max-w-none print:space-y-6 print:rounded-none print:border-0 print:bg-transparent print:p-0 print:shadow-none sm:p-8 md:p-10">
+          <div className="flex justify-end print:hidden">
+            <ThemeToggle />
+          </div>
           <header className="flex flex-col-reverse items-start justify-between gap-6 sm:flex-row sm:items-center">
             <div className="min-w-0 flex-1 space-y-3">
               <p className="text-xs font-medium uppercase tracking-[0.2em] text-muted-foreground">
@@ -246,7 +245,7 @@ export default async function Page() {
                   </p>
                 </div>
                 <Button variant="secondary" asChild>
-                  <a href="/ITIL-Cert.png" download>
+                  <a href="/media/ITIL-Cert.png" download="ITIL-Cert.png">
                     <DownloadIcon className="mr-2 h-4 w-4" />
                     Herunterladen
                   </a>
