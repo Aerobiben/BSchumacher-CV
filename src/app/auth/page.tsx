@@ -28,6 +28,10 @@ export default function AuthPage() {
         setPassword('');
         router.push('/');
         router.refresh();
+      } else if (response.status === 429) {
+        setError('Zu viele Versuche. Bitte später erneut versuchen.');
+        setShake(true);
+        setTimeout(() => setShake(false), 500);
       } else {
         setError('Falsches Passwort. Bitte versuchen Sie es erneut.');
         setPassword('');
@@ -74,10 +78,13 @@ export default function AuthPage() {
             <Lock className="pointer-events-none absolute left-3.5 top-1/2 h-4 w-4 -translate-y-1/2 text-slate-500" />
             <input
               type={show ? 'text' : 'password'}
+              name="password"
+              autoComplete="current-password"
               value={password}
               onChange={(e) => setPassword(e.target.value)}
               placeholder="Passwort"
               autoFocus
+              maxLength={128}
               disabled={loading}
               className="w-full rounded-xl border border-white/10 bg-white/5 py-3 pl-10 pr-11 text-white placeholder-slate-500 outline-none transition focus:border-blue-500/60 focus:bg-white/10 focus:ring-2 focus:ring-blue-500/40 disabled:opacity-60"
             />
@@ -116,7 +123,7 @@ export default function AuthPage() {
 
         <p className="mt-6 flex items-center justify-center gap-1.5 text-xs text-slate-500">
           <ShieldCheck className="h-3.5 w-3.5" />
-          Passwortgeschützt · Ende-zu-Ende gesichert
+          Passwortgeschützt · Sitzung 24 Stunden gültig
         </p>
       </div>
     </div>

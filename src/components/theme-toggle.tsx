@@ -41,7 +41,7 @@ export function ThemeToggle() {
       size="icon"
       aria-label={theme === 'dark' ? 'Wechsel zu Hellmodus' : 'Wechsel zu Dunkelmodus'}
       onClick={toggleTheme}
-      className="transition-colors duration-200"
+      className="h-9 w-9 rounded-full shadow-md shadow-black/10 transition-colors duration-200"
     >
       {theme === 'dark' ? <SunIcon className="h-4 w-4" /> : <MoonIcon className="h-4 w-4" />}
     </Button>

@@ -1,25 +1,43 @@
-import { NextRequest, NextResponse } from 'next/server';
+import { NextRequest, NextResponse } from "next/server";
+import { AUTH_COOKIE, isValidSessionToken } from "@/lib/auth";
 
-const publicPaths = ['/auth', '/api/auth'];
+const publicExactPaths = new Set(["/auth", "/api/auth"]);
 
-export function middleware(request: NextRequest) {
+const securityHeaders: Record<string, string> = {
+  "X-Frame-Options": "DENY",
+  "X-Content-Type-Options": "nosniff",
+  "Referrer-Policy": "strict-origin-when-cross-origin",
+  "Permissions-Policy": "camera=(), microphone=(), geolocation=()",
+  "X-DNS-Prefetch-Control": "off",
+};
+
+function withSecurityHeaders(response: NextResponse) {
+  for (const [key, value] of Object.entries(securityHeaders)) {
+    response.headers.set(key, value);
+  }
+  return response;
+}
+
+export async function middleware(request: NextRequest) {
   const pathname = request.nextUrl.pathname;
+  const isPublic =
+    publicExactPaths.has(pathname) || pathname.startsWith("/api/auth/");
 
-  if (publicPaths.some((path) => pathname === path || pathname.startsWith(`${path}/`))) {
-    return NextResponse.next();
+  if (isPublic) {
+    return withSecurityHeaders(NextResponse.next());
   }
 
-  const authToken = request.cookies.get('cv-auth-token');
-
-  if (!authToken) {
+  const token = request.cookies.get(AUTH_COOKIE)?.value;
+  if (!(await isValidSessionToken(token))) {
     const authUrl = request.nextUrl.clone();
-    authUrl.pathname = '/auth';
-    return NextResponse.redirect(authUrl);
+    authUrl.pathname = "/auth";
+    authUrl.search = "";
+    return withSecurityHeaders(NextResponse.redirect(authUrl));
   }
 
-  return NextResponse.next();
+  return withSecurityHeaders(NextResponse.next());
 }
 
 export const config = {
-  matcher: ['/((?!_next/static|_next/image|favicon.ico).*)'],
+  matcher: ["/((?!_next/static|favicon.ico).*)"],
 };
