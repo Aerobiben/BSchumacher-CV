@@ -2,21 +2,17 @@
 # https://hub.docker.com/_/node
 FROM node:18-slim
 
-# Create and change to the app directory.
 WORKDIR /usr/src/app
 
-# Copy application dependency manifests to the container image.
-# A wildcard is used to ensure both package.json AND package-lock.json are copied.
-COPY package*.json ./
+COPY package.json package-lock.json ./
+RUN npm ci
 
-# Install all dependencies.
-RUN npm install
-
-# Copy local code to the container image.
 COPY . .
+RUN npm run build \
+  && chown -R node:node /usr/src/app
 
-# Build the app
-RUN npm run build
+ENV NODE_ENV=production
+EXPOSE 3000
+USER node
 
-# Run the web service on container startup.
 CMD [ "npm", "start" ]

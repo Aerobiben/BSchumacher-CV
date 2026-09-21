@@ -30,7 +30,7 @@ export default function RootLayout({
       <head>
         <script dangerouslySetInnerHTML={{ __html: themeInitScript }} />
       </head>
-      <body>
+      <body className="min-h-screen bg-background">
         {children}
         <Analytics />
       </body>

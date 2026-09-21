@@ -16,7 +16,7 @@
 export const RESUME_DATA = {
   name: "Ben Schumacher",
   initials: "BS", // Fallback für Avatar, falls Bild nicht lädt
-  location: "Cologne, Germany,",
+  location: "Cologne, Germany",
   locationLink: "https://www.google.com/maps/place/Cologne",
   about: "21 Jahre alt · Auszubildender zum Fachinformatiker für Systemintegration · In Köln geboren und aufgewachsen",
   summary:
