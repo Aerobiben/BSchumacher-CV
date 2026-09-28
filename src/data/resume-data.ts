@@ -52,7 +52,7 @@ export const RESUME_DATA = {
         "IT-Grundlagen, Netzwerk- und Serveradministration, IT-Sicherheit, Hardware-Einrichtung sowie Support und Wartung von IT-Systemen.",
     },
     {
-      company: "aerobis",
+      company: "Aerobis",
       link: "https://aerobis.com",
       badges: ["Remote"],
       title: "Social Media Manager",

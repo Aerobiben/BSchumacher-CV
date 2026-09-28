@@ -104,7 +104,7 @@ export default function AuthPage() {
                 Wird geprüft …
               </>
             ) : (
-              'Weiter'
+              'Lebenslauf öffnen'
             )}
           </button>
         </form>

@@ -20,5 +20,8 @@ export function formatGermanPhone(e164: string): string {
 
 export function formatDateRange(start: string, end: string): string {
   const formattedEnd = end === "ongoing" ? "heute" : end;
+  if (formattedEnd === start) {
+    return start;
+  }
   return `${start} – ${formattedEnd}`;
 }

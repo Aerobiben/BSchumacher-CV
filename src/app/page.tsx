@@ -8,6 +8,7 @@ import { Section } from "@/components/ui/section";
 import { DownloadIcon, GlobeIcon, MailIcon, PhoneIcon } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { ThemeToggle } from "@/components/theme-toggle";
+import { PrintButton } from "@/components/print-button";
 import { RESUME_DATA } from "@/data/resume-data";
 import { GitHubIcon, LinkedInIcon } from "@/components/icons";
 import { cookies } from "next/headers";
@@ -38,9 +39,10 @@ export default async function Page() {
     <main className="relative min-h-screen overflow-x-hidden">
       <div className="pointer-events-none absolute inset-0 -z-10 bg-[radial-gradient(ellipse_at_top,_hsl(var(--muted))_0%,_transparent_55%)] print:hidden" />
 
-      <div className="container mx-auto px-4 py-8 pb-24 print:max-w-none print:p-0 md:px-8 md:py-12 md:pb-24">
+      <div className="container mx-auto px-4 py-8 print:max-w-none print:p-0 md:px-8 md:py-12">
         <article className="mx-auto w-full max-w-3xl space-y-9 border border-border bg-card p-6 shadow-sm print:max-w-none print:space-y-6 print:border-0 print:bg-transparent print:p-0 print:shadow-none sm:p-10">
-          <div className="flex justify-end print:hidden">
+          <div className="flex items-center justify-end gap-1 print:hidden">
+            <PrintButton />
             <ThemeToggle />
           </div>
 
