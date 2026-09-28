@@ -35,17 +35,17 @@ export const CommandMenu = ({ links }: Props) => {
 
   return (
     <>
-      <p className="fixed bottom-4 left-1/2 z-40 hidden -translate-x-1/2 rounded-full border bg-background/90 px-4 py-1.5 text-center text-sm text-muted-foreground shadow-sm backdrop-blur print:hidden xl:block">
-        <kbd className="pointer-events-none mr-1 inline-flex h-5 select-none items-center gap-1 rounded border bg-muted px-1.5 font-mono text-[10px] font-medium text-muted-foreground">
-          <span className="text-xs">⌘</span>J
+      <p className="fixed bottom-4 left-1/2 z-40 hidden -translate-x-1/2 text-xs text-muted-foreground print:hidden xl:block">
+        <kbd className="mr-1 rounded border bg-muted px-1.5 py-0.5 font-mono text-[10px]">
+          ⌘J
         </kbd>
-        Befehlsmenü öffnen
+        Drucken und Links
       </p>
       <Button
         onClick={() => setOpen((prevOpen: boolean) => !prevOpen)}
         variant="outline"
         size="icon"
-        className="fixed bottom-4 right-4 flex rounded-full shadow-2xl print:hidden xl:hidden"
+        className="fixed bottom-4 right-4 flex rounded-full print:hidden xl:hidden"
       >
         <Command className="h-6 w-6" />
       </Button>

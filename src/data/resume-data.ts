@@ -11,20 +11,17 @@
  *  (weitere Icons in src/components/icons/ anlegen und in page.tsx eintragen)
  */
 
-// ─── Persönliche Daten ───────────────────────────────────────────────────────
-
 export const RESUME_DATA = {
   name: "Ben Schumacher",
-  initials: "BS", // Fallback für Avatar, falls Bild nicht lädt
-  location: "Cologne, Germany",
+  initials: "BS",
+  headline: "Auszubildender Fachinformatiker für Systemintegration",
+  location: "Köln, Deutschland",
   locationLink: "https://www.google.com/maps/place/Cologne",
-  about: "21 Jahre alt · Auszubildender zum Fachinformatiker für Systemintegration · In Köln geboren und aufgewachsen",
+  about:
+    "21 Jahre · in Köln geboren und aufgewachsen",
   summary:
-    "Nach meinem Abitur im Jahr 2023 habe ich gezielt nach einem Berufsfeld gesucht, das meinen Interessen und Fähigkeiten entspricht und bin dabei auf den Ausbildungsberuf des Fachinformatikers für Systemintegration gestoßen, den ich seitdem mit großer Begeisterung verfolge und voraussichtlich 2027 abschließen werde. Besonders reizt mich dabei die Möglichkeit, wiederkehrende Arbeitsabläufe zu automatisieren und verschiedenste IT-Tools auszuprobieren, um Prozesse effizienter und das Arbeiten insgesamt einfacher zu gestalten. Diese Begeisterung für Automatisierung ist für mich weit mehr als nur ein Hobby sie ist die treibende Kraft hinter meiner beruflichen Ausrichtung, weshalb ich auch nach meiner Ausbildung gezielt in einem Tätigkeitsfeld arbeiten möchte, das mir Raum gibt, diese Leidenschaft weiterzuverfolgen.", 
+    "Nach meinem Abitur 2023 habe ich gezielt nach einem Berufsfeld gesucht, das zu meinen Interessen und Fähigkeiten passt, und bin dabei auf die Ausbildung zum Fachinformatiker für Systemintegration gestoßen. Diese verfolge ich seit 2023 mit großem Engagement und werde sie voraussichtlich 2027 abschließen. Besonders reizt mich, wiederkehrende Abläufe zu automatisieren und IT-Werkzeuge so einzusetzen, dass Prozesse effizienter und die tägliche Arbeit einfacher werden. Automatisierung ist für mich mehr als ein Hobby – sie bestimmt meine berufliche Ausrichtung. Deshalb möchte ich auch nach der Ausbildung in einem Umfeld arbeiten, das Raum für diese Leidenschaft lässt.",
   avatarUrl: "https://avatars.githubusercontent.com/u/154968490?v=4",
-
-  // ─── Kontakt ─────────────────────────────────────────────────────────────
-  // email/tel leer lassen ("") → Button wird ausgeblendet
 
   contact: {
     email: "bschumis@outlook.com",
@@ -40,106 +37,99 @@ export const RESUME_DATA = {
         url: "https://www.linkedin.com/in/ben-schumacher-445493194",
         icon: "linkedin" as const,
       },
-      // Neues Social-Medium hinzufügen:
-      // { name: "X", url: "https://x.com/...", icon: "x" as const },
     ],
   },
 
-  // ─── Berufserfahrung ─────────────────────────────────────────────────────
-  // Neueste Stelle zuerst. Block kopieren zum Hinzufügen, Block löschen zum Entfernen.
-  // badges: [] wenn keine Tags nötig (z.B. "Remote", "Vollzeit")
-  // end: "ongoing" für aktuelle Stelle
-
   work: [
-     {
+    {
       company: "Inverto GmbH",
       link: "https://www.inverto.de/",
       badges: [],
-      title: "Azubi Fachinformatiker für Systemintegration",
+      title: "Auszubildender Fachinformatiker für Systemintegration",
       start: "2023",
       end: "ongoing",
       description:
-        "Grundlagen der IT, Netzwerkadministration, Serveradministration, IT-Sicherheit, Hardware einrichtung, Support und Wartung von IT-Systemen",
-    },   
+        "IT-Grundlagen, Netzwerk- und Serveradministration, IT-Sicherheit, Hardware-Einrichtung sowie Support und Wartung von IT-Systemen.",
+    },
     {
-      company: "Aerobis",
+      company: "aerobis",
       link: "https://aerobis.com",
       badges: ["Remote"],
       title: "Social Media Manager",
       start: "2023",
       end: "ongoing",
       description:
-        "Social Media Beiträge, Anlage und Pflege von Produkten, Fotografie und Optimierung, Optimierung des Shop-Systems",
+        "Erstellung von Social-Media-Beiträgen, Anlage und Pflege von Produkten, Produktfotografie sowie Optimierung des Shop-Systems.",
     },
-  
     {
-      company: "M.Korfmacher",
+      company: "M. Korfmacher",
       link: "https://www.mkorfmacher.de/",
       badges: [],
       title: "Praktikant",
       start: "2021",
       end: "2021",
       description:
-        "Elektrotechnischer Service, Heizungs und Lüfter Service",
+        "Elektrotechnischer Service sowie Heizungs- und Lüftungsservice.",
     },
   ],
 
-  // ─── Ausbildung ──────────────────────────────────────────────────────────
-
   education: [
-     {
-      school: "Georg-Simon-Ohm Berufskolleg Köln",
-      degree: "Fachinformatiker für Systemintegration",
+    {
+      school: "Georg-Simon-Ohm-Berufskolleg Köln",
+      degree: "Ausbildung zum Fachinformatiker für Systemintegration",
       start: "2024",
       end: "2027",
     },
     {
       school: "Abtei-Gymnasium Brauweiler",
-      degree: "Abitur",
+      degree: "Allgemeine Hochschulreife (Abitur)",
       start: "2016",
       end: "2023",
     },
-  
   ],
 
-  // ─── Skills ──────────────────────────────────────────────────────────────
-  // Ein Skill pro Zeile. Zeile löschen oder auskommentieren zum Entfernen.
-
-  skills: [
-    "Proxmox VE Umgebung",
-    "Python(Grundlagen)",
-    "Konfiguration und Installation von neuer Hardware",
-    "Microsoft 365 Administration",
-    "IT Support mit internationalem Kundenkontakt",
-    "ITIL 4 Foundation Training",
-    "Erfahrung mit diversen KI Tools",
-    "Automatisierung von Prozessen",
-    "Englisch (fließend)",
-    "Deutsch (Muttersprache)",
-    "Führerschein Klasse B",
+  skillGroups: [
+    {
+      title: "Technik",
+      items: [
+        "Proxmox VE",
+        "Python (Grundlagen)",
+        "Hardware-Installation und -Konfiguration",
+        "Microsoft 365 Administration",
+        "IT-Support mit internationalem Kundenkontakt",
+        "ITIL 4 Foundation",
+        "Prozessautomatisierung",
+        "KI-Werkzeuge",
+      ],
+    },
+    {
+      title: "Sprachen",
+      items: ["Deutsch (Muttersprache)", "Englisch (fließend)"],
+    },
+    {
+      title: "Sonstiges",
+      items: ["Führerschein Klasse B"],
+    },
   ],
-
-  // ─── Projekte (optional) ─────────────────────────────────────────────────
-  // Array leer lassen ([]) → Projekte-Sektion wird nicht angezeigt
 
   projects: [
     {
-      title: "Private Proxmox VE Umgebung",
+      title: "Private Proxmox-VE-Umgebung",
       description:
-        "Private Proxmox VE Umgebung mit mehreren virtuellen Maschinen und eigener Cloud, erreichbar über Cloudflare Tunnel und eigener Domain.",
-        image: "/media/project-1.svg",
+        "Homelab mit mehreren virtuellen Maschinen und eigener Cloud, erreichbar über Cloudflare Tunnel und eine eigene Domain.",
+      image: "/media/project-1.svg",
     },
     {
       title: "Digitale Bewerbungswebsite",
       description:
-        "Moderne Bewerbungswebsite mit Passwortschutz, Download-Funktion und responsive Darstellung für Personalverantwortliche.",
-        image: "/media/project-2.svg",
+        "Passwortgeschützte Bewerbungsseite mit Download-Funktion und responsiver Darstellung für Personalverantwortliche.",
+      image: "/media/project-2.svg",
     },
     {
-      title: "IT-Automatisierung & Support",
+      title: "IT-Automatisierung und Support",
       description:
-        "Automatisierung von Prozessen und IT-Support-Workflows mit Python, Monitoring und systemnaher Konfiguration.",
-        image: "/media/project-3.svg",
+        "Automatisierung von Support-Workflows mit Python, Monitoring und systemnaher Konfiguration.",
+      image: "/media/project-3.svg",
     },
   ],
 } as const;
