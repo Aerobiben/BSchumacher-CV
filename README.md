@@ -6,10 +6,14 @@ Gebaut mit Next.js 14, React, TypeScript, Tailwind CSS und shadcn/ui — deploye
 
 ## Features
 
-- **Eine Konfigurationsdatei**: Alle Inhalte werden in [`src/data/resume-data.ts`](./src/data/resume-data.ts) gepflegt.
+- **Eine Konfigurationsdatei**: Alle Inhalte werden in [`src/data/resume-data.ts`](./src/data/resume-data.ts) gepflegt. Texte können einsprachig oder als `{ de, en }` hinterlegt werden.
+- **Deutsch / Englisch**: Umschalten in der Kopfzeile; die Wahl bleibt als Cookie erhalten.
+- **Kontakt-Hilfen**: E-Mail und Telefon kopieren, vCard herunterladen, auf dem Handy eine Kontaktleiste (Anrufen / E-Mail / Kontakt speichern).
+- **Navigation**: Sprungmarken zu den Abschnitten, Command-Menü (⌘/Strg + K oder J) inkl. Drucken, vCard, Sprache und Abmelden.
+- **Lebenslauf-Details**: Verfügbarkeit, Dauer der Stationen, Stichpunkte statt Fließtext, Zertifikate mit Ansehen/Download, Projekt-Tags.
+- **Druck-/PDF-optimiertes Layout** (A4, helles Druckthema unabhängig vom Dark Mode).
 - **Dark Mode** mit System-Erkennung und ohne Aufblitzen beim Laden.
 - **Passwortschutz** über Middleware + serverseitige Auth-Route. Das Passwort wird ausschließlich als **SHA-256-Hash** geprüft — es liegt nirgendwo im Klartext vor. Nach dem Login wird ein **signiertes Sitzungs-Cookie** gesetzt; ein selbst gesetzter Cookie-Wert reicht nicht aus.
-- **Druck-/PDF-optimiertes Layout** sowie ein Command-Menü (⌘/Strg + J).
 - Responsive für unterschiedliche Geräte.
 
 ## Entwicklung
@@ -43,9 +47,20 @@ hinterlegen — oder optional über die Umgebungsvariable `CV_PASSWORD_HASH`
 
 ## Inhalte anpassen
 
-Sämtliche Texte (Name, Kontakt, Berufserfahrung, Ausbildung, Skills, Projekte)
+Sämtliche Texte (Name, Kontakt, Berufserfahrung, Ausbildung, Skills, Zertifikate, Projekte)
 werden ausschließlich in [`src/data/resume-data.ts`](./src/data/resume-data.ts)
 gepflegt. Leere Arrays blenden die jeweilige Sektion automatisch aus.
+
+Zweisprachige Felder:
+
+```ts
+headline: {
+  de: "Auszubildender Fachinformatiker für Systemintegration",
+  en: "IT Specialist for System Integration (Apprentice)",
+}
+```
+
+Reine Strings (Namen, URLs, E-Mail) gelten für beide Sprachen.
 
 ## Deployment auf Vercel
 

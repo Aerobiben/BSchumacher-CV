@@ -75,12 +75,51 @@
   }
 
   @media print {
+    :root,
+    .dark {
+      --background: 0 0% 100%;
+      --foreground: 222 47% 11%;
+      --card: 0 0% 100%;
+      --card-foreground: 222 47% 11%;
+      --muted: 40 16% 94%;
+      --muted-foreground: 215 16% 40%;
+      --secondary: 220 14.3% 95.9%;
+      --secondary-foreground: 220.9 39.3% 11%;
+      --accent: 220 14.3% 95.9%;
+      --accent-foreground: 220.9 39.3% 11%;
+      --border: 40 13% 88%;
+      --primary: 220.9 39.3% 11%;
+      --primary-foreground: 210 20% 98%;
+    }
+
     body {
       @apply bg-white text-black;
+    }
+
+    a[href]::after {
+      content: none !important;
+    }
+
+    * {
+      print-color-adjust: exact;
+      -webkit-print-color-adjust: exact;
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    html {
+      scroll-behavior: auto;
     }
   }
 }
 
-.print-force-new-page {
-  page-break-before: always;
+@page {
+  size: A4;
+  margin: 14mm;
+}
+
+@media print {
+  html {
+    font-size: 12px;
+  }
 }

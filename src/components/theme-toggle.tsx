@@ -8,7 +8,13 @@ const STORAGE_KEY = 'theme-preference';
 
 type Theme = 'light' | 'dark';
 
-export function ThemeToggle() {
+export function ThemeToggle({
+  lightLabel,
+  darkLabel,
+}: {
+  lightLabel: string;
+  darkLabel: string;
+}) {
   const [theme, setTheme] = useState<Theme>('light');
   const [mounted, setMounted] = useState(false);
 
@@ -32,14 +38,22 @@ export function ThemeToggle() {
   };
 
   if (!mounted) {
-    return null;
+    return (
+      <Button
+        variant="secondary"
+        size="icon"
+        aria-hidden
+        tabIndex={-1}
+        className="h-8 w-8 rounded-md print:hidden"
+      />
+    );
   }
 
   return (
     <Button
       variant="secondary"
       size="icon"
-      aria-label={theme === 'dark' ? 'Wechsel zu Hellmodus' : 'Wechsel zu Dunkelmodus'}
+      aria-label={theme === 'dark' ? lightLabel : darkLabel}
       onClick={toggleTheme}
       className="h-8 w-8 rounded-md print:hidden"
     >

@@ -78,3 +78,15 @@ export async function POST(request: NextRequest) {
     );
   }
 }
+
+export async function DELETE() {
+  cookies().set(AUTH_COOKIE, "", {
+    httpOnly: true,
+    secure: process.env.NODE_ENV === "production",
+    sameSite: "strict",
+    maxAge: 0,
+    path: "/",
+  });
+
+  return NextResponse.json({ success: true });
+}
