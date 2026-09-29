@@ -108,8 +108,7 @@ export function ResumePage({
           id="content"
           className="mx-auto w-full max-w-3xl space-y-9 border border-border bg-card p-6 shadow-sm print:max-w-none print:space-y-6 print:border-0 print:bg-transparent print:p-0 print:shadow-none sm:p-10"
         >
-          <div className="flex flex-col-reverse gap-3 sm:flex-row sm:items-center sm:justify-between print:hidden">
-            <SectionNav sections={sections} label={labels.sectionNav} />
+          <div className="flex flex-col gap-3 print:hidden">
             <div
               className="flex flex-wrap items-center justify-end gap-1"
               aria-label={labels.documentActions}
@@ -122,6 +121,7 @@ export function ResumePage({
                 darkLabel={labels.themeToDark}
               />
             </div>
+            <SectionNav sections={sections} label={labels.sectionNav} />
           </div>
 
           <header className="flex flex-col gap-6 sm:flex-row sm:items-start sm:justify-between">

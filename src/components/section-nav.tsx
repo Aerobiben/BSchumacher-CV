@@ -43,11 +43,8 @@ export function SectionNav({
   }, [sections]);
 
   return (
-    <nav
-      aria-label={label}
-      className="print:hidden -mx-1 overflow-x-auto"
-    >
-      <ul className="flex min-w-max gap-1">
+    <nav aria-label={label} className="print:hidden">
+      <ul className="flex flex-wrap gap-1">
         {sections.map((section) => (
           <li key={section.id}>
             <a
