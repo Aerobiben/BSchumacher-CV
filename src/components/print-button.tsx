@@ -3,7 +3,7 @@
 import { PrinterIcon } from "lucide-react";
 import { Button } from "@/components/ui/button";
 
-export function PrintButton() {
+export function PrintButton({ label }: { label: string }) {
   return (
     <Button
       variant="ghost"
@@ -12,7 +12,7 @@ export function PrintButton() {
       onClick={() => window.print()}
     >
       <PrinterIcon className="mr-1.5 h-3.5 w-3.5" />
-      Drucken
+      {label}
     </Button>
   );
 }

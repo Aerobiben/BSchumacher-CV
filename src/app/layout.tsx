@@ -1,10 +1,12 @@
 import type { Metadata } from "next";
 import { Analytics } from "@vercel/analytics/react";
 import { Inter, Source_Serif_4 } from "next/font/google";
+import { cookies } from "next/headers";
 
 // @ts-ignore: Cannot find module or type declarations for side-effect import of './globals.css'.
 import "./globals.css";
 import React from "react";
+import { LOCALE_COOKIE, parseLocale } from "@/lib/locale";
 
 export const metadata: Metadata = {
   title: "Ben Schumacher — Lebenslauf",
@@ -31,10 +33,12 @@ export default function RootLayout({
 }: {
   children: React.ReactNode;
 }) {
+  const locale = parseLocale(cookies().get(LOCALE_COOKIE)?.value);
+
   return (
     <html
-      lang="de"
-      className={`${inter.variable} ${sourceSerif.variable}`}
+      lang={locale}
+      className={`${inter.variable} ${sourceSerif.variable} scroll-smooth`}
       suppressHydrationWarning
     >
       <head>
