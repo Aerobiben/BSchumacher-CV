@@ -6,7 +6,6 @@ import { requireCvSession } from "@/lib/session";
 import {
   getLocalizedProject,
   getLocalizedProjects,
-  getProjectSlugs,
   getResume,
   RESUME_DATA,
 } from "@/data/resume-data";
@@ -14,9 +13,7 @@ import { ProjectPage } from "@/components/project-page";
 
 type Params = { slug: string };
 
-export function generateStaticParams() {
-  return getProjectSlugs().map((slug) => ({ slug }));
-}
+export const dynamic = "force-dynamic";
 
 export async function generateMetadata({
   params,
@@ -35,7 +32,7 @@ export async function generateMetadata({
 }
 
 export default async function ProjectRoute({ params }: { params: Params }) {
-  await requireCvSession();
+  await requireCvSession(`/projekte/${params.slug}`);
 
   const locale = parseLocale(cookies().get(LOCALE_COOKIE)?.value);
   const project = getLocalizedProject(params.slug, locale);

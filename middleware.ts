@@ -29,12 +29,9 @@ export async function middleware(request: NextRequest) {
 
   const token = request.cookies.get(AUTH_COOKIE)?.value;
   if (!(await isValidSessionToken(token))) {
-    const authUrl = request.nextUrl.clone();
-    const nextPath = `${pathname}${request.nextUrl.search}`;
-    authUrl.pathname = "/auth";
-    authUrl.search = "";
-    if (nextPath && nextPath !== "/" && nextPath.startsWith("/")) {
-      authUrl.searchParams.set("next", nextPath);
+    const authUrl = new URL("/auth", request.url);
+    if (pathname !== "/") {
+      authUrl.searchParams.set("next", pathname);
     }
     return withSecurityHeaders(NextResponse.redirect(authUrl));
   }

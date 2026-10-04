@@ -157,7 +157,7 @@ export const CommandMenu = ({
               const next = locale === "de" ? "en" : "de";
               document.cookie = `${LOCALE_COOKIE}=${next}; Path=/; Max-Age=31536000; SameSite=Lax`;
               close();
-              router.refresh();
+              window.location.reload();
             }}
           >
             <span>{labels.commandLanguage}</span>

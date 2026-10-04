@@ -1,6 +1,5 @@
 "use client";
 
-import { useRouter } from "next/navigation";
 import { LOCALE_COOKIE, type Locale } from "@/lib/locale";
 import { cn } from "@/lib/utils";
 
@@ -11,14 +10,12 @@ export function LanguageToggle({
   locale: Locale;
   label: string;
 }) {
-  const router = useRouter();
-
   const setLocale = (next: Locale) => {
     if (next === locale) {
       return;
     }
     document.cookie = `${LOCALE_COOKIE}=${next}; Path=/; Max-Age=31536000; SameSite=Lax`;
-    router.refresh();
+    window.location.reload();
   };
 
   return (
