@@ -1,17 +1,15 @@
 import type { ReactNode } from "react";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
-import { Card, CardContent, CardHeader } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { CommandMenu } from "@/components/command-menu";
-import Image from "next/image";
 import {
   CalendarDaysIcon,
   DownloadIcon,
-  ExternalLinkIcon,
   GlobeIcon,
   MailIcon,
   PhoneIcon,
 } from "lucide-react";
+import { ProjectCard } from "@/components/project-page";
 import { Button } from "@/components/ui/button";
 import { ThemeToggle } from "@/components/theme-toggle";
 import { PrintButton } from "@/components/print-button";
@@ -379,60 +377,11 @@ export function ResumePage({
               <Heading id="projects">{labels.projects}</Heading>
               <div className="grid gap-5 sm:grid-cols-2">
                 {resume.projects.map((project) => (
-                  <Card
-                    key={project.title}
-                    className="overflow-hidden border-border bg-card shadow-none break-inside-avoid"
-                  >
-                    {project.image ? (
-                      <div className="relative h-36 overflow-hidden bg-muted">
-                        <Image
-                          src={project.image}
-                          alt=""
-                          fill
-                          className="object-cover"
-                          sizes="(max-width: 640px) 100vw, 50vw"
-                        />
-                      </div>
-                    ) : null}
-                    <CardHeader className="p-4 pb-2">
-                      <h3 className="text-base font-medium leading-snug">
-                        {project.link ? (
-                          <a
-                            href={project.link}
-                            target="_blank"
-                            rel="noreferrer"
-                            className="inline-flex items-center gap-1.5 hover:underline"
-                          >
-                            {project.title}
-                            <ExternalLinkIcon className="h-3.5 w-3.5 text-muted-foreground" />
-                          </a>
-                        ) : (
-                          project.title
-                        )}
-                      </h3>
-                    </CardHeader>
-                    <CardContent className="space-y-3 p-4 pt-0 font-sans text-sm leading-relaxed">
-                      <p>{project.description}</p>
-                      {project.link ? (
-                        <p className="hidden text-xs text-muted-foreground print:block">
-                          {project.link.replace(/^https?:\/\//, "")}
-                        </p>
-                      ) : null}
-                      {project.tags.length > 0 && (
-                        <div className="flex flex-wrap gap-1">
-                          {project.tags.map((tag) => (
-                            <Badge
-                              key={tag}
-                              variant="secondary"
-                              className="font-sans text-[11px] font-medium"
-                            >
-                              {tag}
-                            </Badge>
-                          ))}
-                        </div>
-                      )}
-                    </CardContent>
-                  </Card>
+                  <ProjectCard
+                    key={project.slug}
+                    project={project}
+                    openLabel={labels.openProject}
+                  />
                 ))}
               </div>
             </Section>
@@ -454,6 +403,7 @@ export function ResumePage({
         labels={labels}
         sections={sections}
         vcard={vcard}
+        projects={resume.projects}
         links={resume.contact.social.map((social) => ({
           url: social.url,
           title: social.name,

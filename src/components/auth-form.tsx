@@ -9,9 +9,11 @@ import type { Locale, UiLabels } from "@/lib/locale";
 export function AuthForm({
   locale,
   labels,
+  nextPath = "/",
 }: {
   locale: Locale;
   labels: UiLabels;
+  nextPath?: string;
 }) {
   const [password, setPassword] = useState("");
   const [show, setShow] = useState(false);
@@ -34,7 +36,7 @@ export function AuthForm({
 
       if (response.ok) {
         setPassword("");
-        router.push("/");
+        router.push(nextPath);
         router.refresh();
       } else if (response.status === 429) {
         setError(labels.authLocked);

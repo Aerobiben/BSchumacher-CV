@@ -30,8 +30,10 @@ interface Props {
     | "commandLogout"
     | "copyEmail"
     | "copyPhone"
+    | "commandProjects"
   >;
   sections: ResumeSection[];
+  projects?: { href: string; title: string }[];
   links: { url: string; title: string }[];
   vcard: {
     name: string;
@@ -43,7 +45,14 @@ interface Props {
   };
 }
 
-export const CommandMenu = ({ locale, labels, sections, links, vcard }: Props) => {
+export const CommandMenu = ({
+  locale,
+  labels,
+  sections,
+  projects = [],
+  links,
+  vcard,
+}: Props) => {
   const [open, setOpen] = useState(false);
   const router = useRouter();
 
@@ -72,16 +81,39 @@ export const CommandMenu = ({ locale, labels, sections, links, vcard }: Props) =
               key={section.id}
               onSelect={() => {
                 close();
-                document.getElementById(section.id)?.scrollIntoView({
-                  behavior: "smooth",
-                  block: "start",
-                });
+                const heading = document.getElementById(section.id);
+                if (heading) {
+                  heading.scrollIntoView({
+                    behavior: "smooth",
+                    block: "start",
+                  });
+                  return;
+                }
+                window.location.assign(`/#${section.id}`);
               }}
             >
               <span>{section.label}</span>
             </CommandItem>
           ))}
         </CommandGroup>
+        {projects.length > 0 ? (
+          <>
+            <CommandSeparator />
+            <CommandGroup heading={labels.commandProjects}>
+              {projects.map((project) => (
+                <CommandItem
+                  key={project.href}
+                  onSelect={() => {
+                    close();
+                    router.push(project.href);
+                  }}
+                >
+                  <span>{project.title}</span>
+                </CommandItem>
+              ))}
+            </CommandGroup>
+          </>
+        ) : null}
         <CommandSeparator />
         <CommandGroup heading={labels.commandActions}>
           <CommandItem
@@ -147,6 +179,10 @@ export const CommandMenu = ({ locale, labels, sections, links, vcard }: Props) =
               key={url}
               onSelect={() => {
                 close();
+                if (url.startsWith("/") && !url.startsWith("//")) {
+                  router.push(url);
+                  return;
+                }
                 window.open(url, "_blank", "noopener,noreferrer");
               }}
             >

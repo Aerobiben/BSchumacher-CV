@@ -194,6 +194,7 @@ export const RESUME_DATA = {
 
   projects: [
     {
+      slug: "proxmox-homelab",
       title: {
         de: "Private Proxmox-VE-Umgebung",
         en: "Private Proxmox VE environment",
@@ -204,8 +205,37 @@ export const RESUME_DATA = {
       },
       image: "/media/project-1.svg",
       tags: ["Proxmox VE", "Cloudflare Tunnel", "Linux"],
+      role: {
+        de: "Persönliches Homelab",
+        en: "Personal homelab",
+      },
+      overview: [
+        {
+          de: "Ich betreibe ein privates Homelab auf Proxmox VE, um Virtualisierung, Netzwerkzugang und selbst gehostete Dienste praxisnah zu lernen — unabhängig von der Ausbildung, aber direkt anschlussfähig an Systemintegration.",
+          en: "I run a private homelab on Proxmox VE to learn virtualization, remote access, and self-hosted services in practice — separate from the apprenticeship, but directly relevant to system integration.",
+        },
+        {
+          de: "Mehrere virtuelle Maschinen laufen in einer eigenen Umgebung. Eine private Cloud ist über einen Cloudflare Tunnel und eine eigene Domain erreichbar, ohne dass Dienste unnötig direkt ins Internet gestellt werden müssen.",
+          en: "Several virtual machines run in that environment. A private cloud is reachable through a Cloudflare Tunnel and a custom domain, without exposing services more directly than necessary.",
+        },
+      ],
+      highlights: [
+        {
+          de: "Proxmox VE als Hypervisor für mehrere virtuelle Maschinen",
+          en: "Proxmox VE as the hypervisor for several virtual machines",
+        },
+        {
+          de: "Eigene Cloud, erreichbar über Cloudflare Tunnel und Domain",
+          en: "Private cloud, reachable through a Cloudflare Tunnel and a domain",
+        },
+        {
+          de: "Übung von Netzwerk-, Speicher- und Zugriffsfragen im kleinen Maßstab",
+          en: "Hands-on practice with networking, storage, and access on a small scale",
+        },
+      ],
     },
     {
+      slug: "bewerbungswebsite",
       title: {
         de: "Digitale Bewerbungswebsite",
         en: "Digital application website",
@@ -217,8 +247,37 @@ export const RESUME_DATA = {
       image: "/media/project-2.svg",
       link: "https://github.com/Aerobiben/BSchumacher-CV",
       tags: ["Next.js", "TypeScript", "Tailwind CSS"],
+      role: {
+        de: "Eigenentwicklung",
+        en: "Personal build",
+      },
+      overview: [
+        {
+          de: "Diese Website ist meine digitale Bewerbungsunterlage: passwortgeschützt, zweisprachig und für Bildschirm sowie Druck bzw. PDF ausgelegt.",
+          en: "This site is my digital application pack: password-protected, bilingual, and laid out for the screen as well as print or PDF.",
+        },
+        {
+          de: "Personalverantwortliche sollen den Lebenslauf schnell lesen, Kontakt speichern und einzelne Projekte genauer ansehen können — ohne eine extra Datei suchen zu müssen.",
+          en: "Hiring managers should be able to read the résumé quickly, save contact details, and open individual projects without hunting for a separate file.",
+        },
+      ],
+      highlights: [
+        {
+          de: "Passwortschutz mit Hash-Vergleich und signiertem Sitzungs-Cookie",
+          en: "Password protection with a hash comparison and a signed session cookie",
+        },
+        {
+          de: "Deutsch und Englisch, Drucklayout, vCard und Kontaktaktionen",
+          en: "German and English, print layout, vCard, and contact actions",
+        },
+        {
+          de: "Eigene Projektseiten hinter den Kacheln im Lebenslauf",
+          en: "Dedicated project pages behind the cards on the résumé",
+        },
+      ],
     },
     {
+      slug: "it-automatisierung",
       title: {
         de: "IT-Automatisierung und Support",
         en: "IT automation and support",
@@ -229,6 +288,34 @@ export const RESUME_DATA = {
       },
       image: "/media/project-3.svg",
       tags: ["Python", { de: "Automatisierung", en: "Automation" }, "Monitoring"],
+      role: {
+        de: "Praxis- und Lernprojekt",
+        en: "Practice and learning project",
+      },
+      overview: [
+        {
+          de: "Wiederkehrende Support-Abläufe lasse ich nicht von Hand laufen, wenn sich Schritte zuverlässig automatisieren lassen. Genau das ist der rote Faden in meiner Ausbildung und in dem, was ich danach tun möchte.",
+          en: "I do not keep running recurring support work by hand if the steps can be automated reliably. That thread runs through my apprenticeship and through the work I want to do afterwards.",
+        },
+        {
+          de: "Dafür nutze ich vor allem Python, ergänzt um Monitoring und systemnahe Konfiguration — damit Störungen früher sichtbar werden und Standardfälle nicht jedes Mal neu angefasst werden müssen.",
+          en: "I use Python first, plus monitoring and systems-level configuration, so issues show up earlier and standard cases do not have to be handled from scratch every time.",
+        },
+      ],
+      highlights: [
+        {
+          de: "Automatisierung von Support-Workflows mit Python",
+          en: "Automation of support workflows with Python",
+        },
+        {
+          de: "Monitoring, um Abweichungen früher zu sehen",
+          en: "Monitoring so deviations show up earlier",
+        },
+        {
+          de: "Systemnahe Konfiguration statt reiner Einmal-Eingriffe",
+          en: "Systems-level configuration instead of one-off fixes",
+        },
+      ],
     },
   ],
 } as const satisfies {
@@ -272,13 +359,23 @@ export const RESUME_DATA = {
     downloadName: string;
   }[];
   projects: readonly {
+    slug: string;
     title: LocalizedText;
     description: LocalizedText;
     image: string;
     link?: string;
     tags: readonly LocalizedText[];
+    role: LocalizedText;
+    overview: readonly LocalizedText[];
+    highlights: readonly LocalizedText[];
   }[];
 };
+
+export const PROJECT_PATH = "/projekte";
+
+export function projectHref(slug: string) {
+  return `${PROJECT_PATH}/${slug}`;
+}
 
 function localizeList(items: readonly LocalizedText[], locale: Locale) {
   return items.map((item) => t(item, locale));
@@ -321,14 +418,40 @@ export function getResume(locale: Locale) {
       file: certificate.file,
       downloadName: certificate.downloadName,
     })),
-    projects: RESUME_DATA.projects.map((project) => ({
-      title: t(project.title, locale),
-      description: t(project.description, locale),
-      image: project.image,
-      link: "link" in project ? project.link : undefined,
-      tags: localizeList(project.tags, locale),
-    })),
+    projects: getLocalizedProjects(locale),
   };
 }
 
+export function localizeProject(
+  project: (typeof RESUME_DATA.projects)[number],
+  locale: Locale,
+) {
+  return {
+    slug: project.slug,
+    href: projectHref(project.slug),
+    title: t(project.title, locale),
+    description: t(project.description, locale),
+    image: project.image,
+    link: "link" in project ? project.link : undefined,
+    tags: localizeList(project.tags, locale),
+    role: t(project.role, locale),
+    overview: localizeList(project.overview, locale),
+    highlights: localizeList(project.highlights, locale),
+  };
+}
+
+export function getLocalizedProjects(locale: Locale) {
+  return RESUME_DATA.projects.map((project) => localizeProject(project, locale));
+}
+
+export function getLocalizedProject(slug: string, locale: Locale) {
+  const project = RESUME_DATA.projects.find((item) => item.slug === slug);
+  return project ? localizeProject(project, locale) : null;
+}
+
+export function getProjectSlugs() {
+  return RESUME_DATA.projects.map((project) => project.slug);
+}
+
 export type Resume = ReturnType<typeof getResume>;
+export type LocalizedProject = ReturnType<typeof localizeProject>;

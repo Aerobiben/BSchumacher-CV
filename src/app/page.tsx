@@ -1,10 +1,9 @@
 ﻿import { Metadata } from "next";
 import { cookies } from "next/headers";
-import { redirect } from "next/navigation";
-import { AUTH_COOKIE, isValidSessionToken } from "@/lib/auth";
 import { LOCALE_COOKIE, parseLocale, t, UI } from "@/lib/locale";
 import { getResume, RESUME_DATA } from "@/data/resume-data";
 import { ResumePage } from "@/components/resume-page";
+import { requireCvSession } from "@/lib/session";
 
 export async function generateMetadata(): Promise<Metadata> {
   const locale = parseLocale(cookies().get(LOCALE_COOKIE)?.value);
@@ -15,11 +14,7 @@ export async function generateMetadata(): Promise<Metadata> {
 }
 
 export default async function Page() {
-  const authToken = cookies().get(AUTH_COOKIE)?.value;
-
-  if (!(await isValidSessionToken(authToken))) {
-    redirect("/auth");
-  }
+  await requireCvSession();
 
   const locale = parseLocale(cookies().get(LOCALE_COOKIE)?.value);
 
