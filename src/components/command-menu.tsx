@@ -12,6 +12,7 @@ import {
   CommandSeparator,
 } from "@/components/ui/command";
 import { downloadResumeVCard } from "@/components/vcard-button";
+import { exportResume } from "@/components/export-buttons";
 import { LOCALE_COOKIE, type Locale, type UiLabels } from "@/lib/locale";
 import type { ResumeSection } from "@/components/section-nav";
 
@@ -25,15 +26,15 @@ interface Props {
     | "commandSections"
     | "commandLinks"
     | "commandPrint"
+    | "commandExportPdf"
+    | "commandExportWord"
     | "commandVcard"
     | "commandLanguage"
     | "commandLogout"
     | "copyEmail"
     | "copyPhone"
-    | "commandProjects"
   >;
   sections: ResumeSection[];
-  projects?: { href: string; title: string }[];
   links: { url: string; title: string }[];
   vcard: {
     name: string;
@@ -49,7 +50,6 @@ export const CommandMenu = ({
   locale,
   labels,
   sections,
-  projects = [],
   links,
   vcard,
 }: Props) => {
@@ -96,24 +96,6 @@ export const CommandMenu = ({
             </CommandItem>
           ))}
         </CommandGroup>
-        {projects.length > 0 ? (
-          <>
-            <CommandSeparator />
-            <CommandGroup heading={labels.commandProjects}>
-              {projects.map((project) => (
-                <CommandItem
-                  key={project.href}
-                  onSelect={() => {
-                    close();
-                    router.push(project.href);
-                  }}
-                >
-                  <span>{project.title}</span>
-                </CommandItem>
-              ))}
-            </CommandGroup>
-          </>
-        ) : null}
         <CommandSeparator />
         <CommandGroup heading={labels.commandActions}>
           <CommandItem
@@ -123,6 +105,22 @@ export const CommandMenu = ({
             }}
           >
             <span>{labels.commandPrint}</span>
+          </CommandItem>
+          <CommandItem
+            onSelect={() => {
+              close();
+              exportResume("pdf");
+            }}
+          >
+            <span>{labels.commandExportPdf}</span>
+          </CommandItem>
+          <CommandItem
+            onSelect={() => {
+              close();
+              exportResume("docx");
+            }}
+          >
+            <span>{labels.commandExportWord}</span>
           </CommandItem>
           <CommandItem
             onSelect={() => {
