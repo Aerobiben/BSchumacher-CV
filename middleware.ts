@@ -29,6 +29,11 @@ export async function middleware(request: NextRequest) {
 
   const token = request.cookies.get(AUTH_COOKIE)?.value;
   if (!(await isValidSessionToken(token))) {
+    if (pathname.startsWith("/api/export")) {
+      return withSecurityHeaders(
+        new NextResponse("Unauthorized", { status: 401 }),
+      );
+    }
     const authUrl = new URL("/auth", request.url);
     if (pathname !== "/") {
       authUrl.searchParams.set("next", pathname);

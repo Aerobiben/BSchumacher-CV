@@ -7,9 +7,6 @@ import { AUTH_COOKIE, isValidSessionToken } from "@/lib/auth";
 export const runtime = "nodejs";
 
 const ALLOWED_FILES: Record<string, string> = {
-  "project-1.svg": "image/svg+xml",
-  "project-2.svg": "image/svg+xml",
-  "project-3.svg": "image/svg+xml",
   "ITIL-Cert.png": "image/png",
 };
 

@@ -9,10 +9,10 @@ import {
   MailIcon,
   PhoneIcon,
 } from "lucide-react";
-import { ProjectCard } from "@/components/project-page";
 import { Button } from "@/components/ui/button";
 import { ThemeToggle } from "@/components/theme-toggle";
 import { PrintButton } from "@/components/print-button";
+import { ExportButtons } from "@/components/export-buttons";
 import { LanguageToggle } from "@/components/language-toggle";
 import { CopyButton } from "@/components/copy-button";
 import { VCardButton } from "@/components/vcard-button";
@@ -85,9 +85,6 @@ export function ResumePage({
     ...(resume.certificates.length > 0
       ? [{ id: "certificates", label: labels.certificates }]
       : []),
-    ...(resume.projects.length > 0
-      ? [{ id: "projects", label: labels.projects }]
-      : []),
   ];
 
   return (
@@ -113,6 +110,12 @@ export function ResumePage({
             >
               <VCardButton {...vcard} label={labels.saveContact} compact />
               <PrintButton label={labels.printPdf} />
+              <ExportButtons
+                pdfLabel={labels.exportPdf}
+                wordLabel={labels.exportWord}
+                pdfAria={labels.exportPdfAria}
+                wordAria={labels.exportWordAria}
+              />
               <LanguageToggle locale={locale} label={labels.language} />
               <ThemeToggle
                 lightLabel={labels.themeToLight}
@@ -372,21 +375,6 @@ export function ResumePage({
             </Section>
           )}
 
-          {resume.projects.length > 0 && (
-            <Section>
-              <Heading id="projects">{labels.projects}</Heading>
-              <div className="grid gap-5 sm:grid-cols-2">
-                {resume.projects.map((project) => (
-                  <ProjectCard
-                    key={project.slug}
-                    project={project}
-                    openLabel={labels.openProject}
-                  />
-                ))}
-              </div>
-            </Section>
-          )}
-
           <footer className="flex flex-col gap-1 border-t border-border pt-4 text-xs text-muted-foreground sm:flex-row sm:items-center sm:justify-between">
             <p>
               {labels.updated} {formatUpdatedAt(resume.updatedAt, locale)}
@@ -403,7 +391,6 @@ export function ResumePage({
         labels={labels}
         sections={sections}
         vcard={vcard}
-        projects={resume.projects}
         links={resume.contact.social.map((social) => ({
           url: social.url,
           title: social.name,

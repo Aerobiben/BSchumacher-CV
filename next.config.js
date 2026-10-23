@@ -8,6 +8,7 @@ const nextConfig = {
     outputFileTracingIncludes: {
       "/media/[file]": ["./content/**/*"],
     },
+    serverComponentsExternalPackages: ["docx"],
   },
   async headers() {
     return [
