@@ -9,6 +9,7 @@ import {
 
 export type ExportJob = {
   company: string;
+  link?: string;
   title: string;
   dates: string;
   badges: string[];
@@ -26,13 +27,24 @@ export type ExportSkillGroup = {
   items: string;
 };
 
+export type ExportSocial = {
+  name: string;
+  url: string;
+  display: string;
+};
+
 export type ExportDocument = {
+  locale: Locale;
   fileBaseName: string;
   name: string;
   headline: string;
   about: string;
   availability?: string;
-  contactLines: string[];
+  location: string;
+  locationLink?: string;
+  email?: string;
+  phone?: string;
+  social: ExportSocial[];
   profileTitle: string;
   summary: string;
   experienceTitle: string;
@@ -57,23 +69,24 @@ export function buildExportDocument(
   labels: UiLabels,
   locale: Locale,
 ): ExportDocument {
-  const phone = resume.contact.tel ? formatGermanPhone(resume.contact.tel) : "";
-  const contactLines = [
-    resume.location,
-    resume.contact.email,
-    phone,
-    ...resume.contact.social.map(
-      (social) => `${social.name}: ${social.url.replace(/^https?:\/\//, "")}`,
-    ),
-  ].filter((line): line is string => Boolean(line));
-
   return {
+    locale,
     fileBaseName: exportFileBaseName(resume.name, locale),
     name: resume.name,
     headline: resume.headline,
     about: resume.about,
     availability: resume.availability || undefined,
-    contactLines,
+    location: resume.location,
+    locationLink: resume.locationLink,
+    email: resume.contact.email || undefined,
+    phone: resume.contact.tel
+      ? formatGermanPhone(resume.contact.tel)
+      : undefined,
+    social: resume.contact.social.map((social) => ({
+      name: social.name,
+      url: social.url,
+      display: social.url.replace(/^https?:\/\/(www\.)?/, ""),
+    })),
     profileTitle: labels.profile,
     summary: resume.summary,
     experienceTitle: labels.experience,
@@ -82,6 +95,7 @@ export function buildExportDocument(
       const range = formatDateRange(work.start, work.end, locale);
       return {
         company: work.company,
+        link: work.link,
         title: work.title,
         dates: tenure ? `${range} · ${tenure}` : range,
         badges: work.badges,
@@ -97,7 +111,7 @@ export function buildExportDocument(
     skillsTitle: labels.skills,
     skillGroups: resume.skillGroups.map((group) => ({
       title: group.title,
-      items: group.items.join(" · "),
+      items: group.items.join("  ·  "),
     })),
     certificatesTitle: labels.certificates,
     certificates: resume.certificates.map((certificate) => certificate.title),

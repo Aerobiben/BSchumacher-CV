@@ -12,7 +12,7 @@ import {
   CommandSeparator,
 } from "@/components/ui/command";
 import { downloadResumeVCard } from "@/components/vcard-button";
-import { exportResume } from "@/components/export-buttons";
+import { exportResumePdf } from "@/components/export-buttons";
 import { LOCALE_COOKIE, type Locale, type UiLabels } from "@/lib/locale";
 import type { ResumeSection } from "@/components/section-nav";
 
@@ -25,9 +25,7 @@ interface Props {
     | "commandActions"
     | "commandSections"
     | "commandLinks"
-    | "commandPrint"
     | "commandExportPdf"
-    | "commandExportWord"
     | "commandVcard"
     | "commandLanguage"
     | "commandLogout"
@@ -101,26 +99,10 @@ export const CommandMenu = ({
           <CommandItem
             onSelect={() => {
               close();
-              window.print();
-            }}
-          >
-            <span>{labels.commandPrint}</span>
-          </CommandItem>
-          <CommandItem
-            onSelect={() => {
-              close();
-              exportResume("pdf");
+              exportResumePdf();
             }}
           >
             <span>{labels.commandExportPdf}</span>
-          </CommandItem>
-          <CommandItem
-            onSelect={() => {
-              close();
-              exportResume("docx");
-            }}
-          >
-            <span>{labels.commandExportWord}</span>
           </CommandItem>
           <CommandItem
             onSelect={() => {

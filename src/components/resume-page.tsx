@@ -11,7 +11,6 @@ import {
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { ThemeToggle } from "@/components/theme-toggle";
-import { PrintButton } from "@/components/print-button";
 import { ExportButtons } from "@/components/export-buttons";
 import { LanguageToggle } from "@/components/language-toggle";
 import { CopyButton } from "@/components/copy-button";
@@ -109,12 +108,9 @@ export function ResumePage({
               aria-label={labels.documentActions}
             >
               <VCardButton {...vcard} label={labels.saveContact} compact />
-              <PrintButton label={labels.printPdf} />
               <ExportButtons
                 pdfLabel={labels.exportPdf}
-                wordLabel={labels.exportWord}
                 pdfAria={labels.exportPdfAria}
-                wordAria={labels.exportWordAria}
               />
               <LanguageToggle locale={locale} label={labels.language} />
               <ThemeToggle

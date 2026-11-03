@@ -7,8 +7,9 @@ const nextConfig = {
   experimental: {
     outputFileTracingIncludes: {
       "/media/[file]": ["./content/**/*"],
+      "/api/export": ["./src/lib/export/fonts/**/*"],
     },
-    serverComponentsExternalPackages: ["docx"],
+    serverComponentsExternalPackages: ["@pdf-lib/fontkit", "pdf-lib"],
   },
   async headers() {
     return [
