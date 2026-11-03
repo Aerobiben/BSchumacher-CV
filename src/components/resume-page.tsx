@@ -14,7 +14,6 @@ import { ThemeToggle } from "@/components/theme-toggle";
 import { ExportButtons } from "@/components/export-buttons";
 import { LanguageToggle } from "@/components/language-toggle";
 import { CopyButton } from "@/components/copy-button";
-import { VCardButton } from "@/components/vcard-button";
 import { SectionNav, type ResumeSection } from "@/components/section-nav";
 import { MobileContactBar } from "@/components/mobile-contact-bar";
 import { Section } from "@/components/ui/section";
@@ -60,15 +59,6 @@ export function ResumePage({
   locale: Locale;
 }) {
   const phoneDisplay = formatGermanPhone(resume.contact.tel);
-  const socialUrls = resume.contact.social.map((social) => social.url);
-  const vcard = {
-    name: resume.name,
-    headline: resume.headline,
-    email: resume.contact.email,
-    tel: resume.contact.tel,
-    location: resume.location,
-    urls: socialUrls,
-  };
 
   const sections: ResumeSection[] = [
     { id: "profile", label: labels.profile },
@@ -107,7 +97,6 @@ export function ResumePage({
               className="flex flex-wrap items-center justify-end gap-1"
               aria-label={labels.documentActions}
             >
-              <VCardButton {...vcard} label={labels.saveContact} compact />
               <ExportButtons
                 pdfLabel={labels.exportPdf}
                 pdfAria={labels.exportPdfAria}
@@ -380,13 +369,18 @@ export function ResumePage({
         </article>
       </div>
 
-      <MobileContactBar {...vcard} labels={labels} />
+      <MobileContactBar
+        email={resume.contact.email}
+        tel={resume.contact.tel}
+        labels={labels}
+      />
 
       <CommandMenu
         locale={locale}
         labels={labels}
         sections={sections}
-        vcard={vcard}
+        email={resume.contact.email}
+        tel={resume.contact.tel}
         links={resume.contact.social.map((social) => ({
           url: social.url,
           title: social.name,

@@ -8,8 +8,8 @@ Gebaut mit Next.js 14, React, TypeScript, Tailwind CSS und shadcn/ui — deploye
 
 - **Eine Konfigurationsdatei**: Alle Inhalte werden in [`src/data/resume-data.ts`](./src/data/resume-data.ts) gepflegt. Texte können einsprachig oder als `{ de, en }` hinterlegt werden.
 - **Deutsch / Englisch**: Umschalten in der Kopfzeile; die Wahl bleibt als Cookie erhalten.
-- **Kontakt-Hilfen**: E-Mail und Telefon kopieren, vCard herunterladen, auf dem Handy eine Kontaktleiste (Anrufen / E-Mail / Kontakt speichern).
-- **Navigation**: Sprungmarken zu den Abschnitten, Command-Menü (⌘/Strg + K oder J) inkl. PDF-Download, vCard, Sprache und Abmelden.
+- **Kontakt-Hilfen**: E-Mail und Telefon kopieren; auf dem Handy eine Leiste zum Anrufen und Schreiben.
+- **Navigation**: Sprungmarken zu den Abschnitten, Command-Menü (⌘/Strg + K oder J) inkl. PDF-Download, Sprache und Abmelden.
 - **Lebenslauf-Details**: Verfügbarkeit, Dauer der Stationen, Stichpunkte statt Fließtext, Zertifikate mit Ansehen/Download.
 - **PDF-Export**: Lebenslauf als druckfähiges PDF herunterladen (nur nach Login, in der gewählten Sprache).
 - **Dark Mode** mit System-Erkennung und ohne Aufblitzen beim Laden.

@@ -11,7 +11,6 @@ import {
   CommandList,
   CommandSeparator,
 } from "@/components/ui/command";
-import { downloadResumeVCard } from "@/components/vcard-button";
 import { exportResumePdf } from "@/components/export-buttons";
 import { LOCALE_COOKIE, type Locale, type UiLabels } from "@/lib/locale";
 import type { ResumeSection } from "@/components/section-nav";
@@ -26,7 +25,6 @@ interface Props {
     | "commandSections"
     | "commandLinks"
     | "commandExportPdf"
-    | "commandVcard"
     | "commandLanguage"
     | "commandLogout"
     | "copyEmail"
@@ -34,14 +32,8 @@ interface Props {
   >;
   sections: ResumeSection[];
   links: { url: string; title: string }[];
-  vcard: {
-    name: string;
-    headline: string;
-    email?: string;
-    tel?: string;
-    location?: string;
-    urls?: string[];
-  };
+  email?: string;
+  tel?: string;
 }
 
 export const CommandMenu = ({
@@ -49,7 +41,8 @@ export const CommandMenu = ({
   labels,
   sections,
   links,
-  vcard,
+  email,
+  tel,
 }: Props) => {
   const [open, setOpen] = useState(false);
   const router = useRouter();
@@ -104,29 +97,21 @@ export const CommandMenu = ({
           >
             <span>{labels.commandExportPdf}</span>
           </CommandItem>
-          <CommandItem
-            onSelect={() => {
-              close();
-              downloadResumeVCard(vcard);
-            }}
-          >
-            <span>{labels.commandVcard}</span>
-          </CommandItem>
-          {vcard.email ? (
+          {email ? (
             <CommandItem
               onSelect={async () => {
                 close();
-                await navigator.clipboard.writeText(vcard.email ?? "");
+                await navigator.clipboard.writeText(email);
               }}
             >
               <span>{labels.copyEmail}</span>
             </CommandItem>
           ) : null}
-          {vcard.tel ? (
+          {tel ? (
             <CommandItem
               onSelect={async () => {
                 close();
-                await navigator.clipboard.writeText(vcard.tel ?? "");
+                await navigator.clipboard.writeText(tel);
               }}
             >
               <span>{labels.copyPhone}</span>
